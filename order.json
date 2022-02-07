@@ -1,0 +1,59 @@
+{
+    "_id": {
+        "$oid": "61fcdbfcf9e79fd054f247ed"
+    },
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            4.587,
+            51.724
+        ]
+    },
+    "properties": {
+        "Order": {
+            "Bonuskaart": 16202573,
+            "Ordernummer": {
+                "$numberLong": "1643961340680"
+            },
+            "Products": [
+                {
+                    "id": "346182",
+                    "cat": "AH",
+                    "name": "Appelsap",
+                    "quantity": 2,
+                    "price": 1.29
+                },
+                {
+                    "id": "550-35",
+                    "cat": "AH",
+                    "name": "Avocado eetrijp",
+                    "quantity": 2,
+                    "price": 2.39
+                },
+                {
+                    "id": "742-90",
+                    "cat": "AH",
+                    "name": "Biologisch Halfvolle melk",
+                    "quantity": 2,
+                    "price": 1.09
+                },
+                {
+                    "id": "742-91",
+                    "cat": "AH",
+                    "name": "Biologisch Karnemelk",
+                    "quantity": 2,
+                    "price": 1.06
+                },
+                {
+                    "id": "742-32",
+                    "cat": "AH",
+                    "name": "Biologisch Volle yoghurt",
+                    "quantity": 1,
+                    "price": 1.09
+                }
+            ]
+        },
+        "Timestamp": "2022-02-04T08:55:40"
+    }
+}
