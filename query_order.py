@@ -30,11 +30,11 @@ filter={
     }
 }
 
-result = db['order'].find(
-  filter=filter
-)
+count = db['order'].count_documents(filter) # number of matches
+result = db['order'].find(filter=filter) # cursor with documents
 
-# Printing the documents in the result response.
-#  NOTE: this can get big, could also go for printing 'result.count()'.
-for document in result: 
-    print(document)
+if count > 0:
+    print(result[0])
+    print('Printed first document out of',count,'results')
+else:
+    print('Query yielded no results')

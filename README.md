@@ -2,6 +2,8 @@
 
 The Shopper repo demoes ingesting online groceries orders, and querying with a spatial query.
 
+ ![Voorbeeld: digitale kassabon in de AH app](800_digitalekassabonindeahapp.png.jpg)
+
 Shopper uses multiple tools to work with the order data: the `mongoimport` database tool for 'batch loading' and `Pymongo` driver to run a specific query in a Python script.
 
 ## Prerequisites
@@ -25,9 +27,9 @@ Get the connection string from the Atlas interface for the cluster you want to u
 
 `mongodb+srv://<user>:<pass>@yourserver.at.mongodb.net/shopper`
 
-# Local
+# Prepare
 
-0. Start MongoDB locally using somethig like:
+## Start local MongoDB using somethig like:
 
 ```
 cd path/to/repo/folder/shopper
@@ -36,13 +38,19 @@ mkdir -p /tmp/data/log
 mongod --fork --logpath /tmp/data/log/mongod.log --dbpath /tmp/data/db
 ```
 
-1. Run `python3 create_order.py` as a test, this will write set of orders to the console
+## Get familiar with the data
 
-2. Run `python3 create_order.py | mongoimport --uri "mongodb://localhost:27017/shopper" --collection order --jsonArray`
+Examine the file [order.json](order.json) to get an idea of the digital order data model.
 
-3. Start Compass: connect, analyze schema, change daat model on the fly, select, create spatial index, export code, aggregation framework.
+# Local
 
-4. Uncomment _local_ connection string in `query_order.py` and run `python3 query_order.py`. Note that the query uses a random point so number of results can vary (0 or more).
+1. Run `python3 create_order.py` as a test, this writes a set of orders to the console, using the digital order data model in `order.json`.
+
+2. Run `python3 create_order.py | mongoimport --uri "mongodb://localhost:27017/shopper" --collection order --jsonArray` to pipe the order stream through `mongoimport` to your local MongoDB installation. Note that the `shopper` database and `order` collection are automatically create if not there. 
+
+3. Start Compass: connect to the database, change data model on the fly, analyze the schema, query using tehn map, create a spatial index, export code, add to aggregation framework, create a view. See the video at <TODO>.
+
+4. Uncomment _local_ connection string in `query_order.py` and run `python3 query_order.py`. Note that the query uses a random point so number of results will vary (0 or more).
 
 # Atlas
 
