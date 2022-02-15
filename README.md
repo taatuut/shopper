@@ -6,6 +6,8 @@ The Shopper repo demoes ingesting online groceries orders, and querying with a s
 
 Shopper uses multiple tools to work with the order data: the `mongoimport` database tool for 'batch loading' and `Pymongo` driver to run a specific query in a Python script.
 
+Code was written on MacOS, mainly Python with a bit of bash code. Some alternative command prompt code for Windows is mentioned in this readme.
+
 ## Prerequisites
 
 * MongoDB installed local, version 4.4 or higher https://docs.mongodb.com/manual/installation/ and/or
@@ -23,9 +25,21 @@ Use *shopper* as default *database name*.
 `mongodb://localhost:27017/shopper`
 
 ### Atlas
-Get the connection string from the Atlas interface for the cluster you want to use, you need to change *user name*, *password* and *database name*. 
+Get the connection string from the Atlas user interface for the cluster you want to use, you need to change *user name*, *password* and *database name*.
 
 `mongodb+srv://<user>:<pass>@yourserver.at.mongodb.net/shopper`
+
+Set atlas_uri as an environment variable to avoid storing connection strings, passwords and the alike in code
+
+On MacOS, Linux
+
+`export atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/shopper`
+
+On Windows
+
+`set atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/shopper`
+
+Retrieve with `$atlas_uri` or `%atlas_uri` on MacOS or Windows, and something like `atlas_uri = os.getenv('atlas_uri')` in Python.
 
 # Prepare
 
@@ -54,7 +68,7 @@ Examine the file [order.json](order.json) to get an idea of the digital order da
 
 # Atlas
 
-5. Run `python3 create_order.py | mongoimport --uri "mongodb+srv://<user>:<pass>@yourserver.at.mongodb.net/shopper" --collection order --jsonArray`
+5. Run `python3 create_order.py | mongoimport --uri "mongodb+srv://<user>:<pass>@yourserver.at.mongodb.net/shopper" --collection order --jsonArray` or with environment variable `python3 create_order.py | mongoimport --uri "$atlas_uri" --collection order --jsonArray`
 
 6. Check Compass tasks (see step 3. above).
 
@@ -72,7 +86,7 @@ _local_
 
 _Atlas_
 
-`clear; while :; do echo $(date); python3 create_order.py | mongoimport --uri mongodb+srv://<user>:<pass>@yourserver.at.mongodb.net/shopper --collection order --jsonArray; sleep 5; done`
+`clear; while :; do echo $(date); python3 create_order.py | mongoimport --uri $atlas_uri --collection order --jsonArray; sleep 5; done`
 
 9. To query continuously, run the below command after setting the right connection string for _local_ or _Atlas_ in `query_order.py`
 

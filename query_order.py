@@ -1,18 +1,13 @@
 from pymongo import MongoClient
 import random
+import os
 
 # local
 client = MongoClient('mongodb://localhost:27017/shopper')
 
-# Atlas - example dummy connection string:
-#
-#       "mongodb+srv://<user>:<pass>@yourserver.at.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-#
-
-# Replace <user> and <pass>, and 'myFirstDatabase' with the name of the database that teh connections should use by default.
-# You can find the connection string in the Atlas UI. You can leave out the Pymongo prefix.
-# TODO: replace YOUR_CONNECTION_STRING_HERE with your own Atlas connection string for Python in the next line and uncomment.
-#client = MongoClient(<YOUR_CONNECTION_STRING_HERE>)
+# See README.md regarding exporting Atlas connection string to an envrionment variable
+atlas_uri = os.getenv('atlas_uri')
+client = MongoClient(atlas_uri)
 
 db = client.shopper
 
