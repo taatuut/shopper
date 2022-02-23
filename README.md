@@ -35,11 +35,13 @@ On MacOS, Linux
 
 `export atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/shopper`
 
+For a local MongoDB installation use `export atlas_uri=mongodb://localhost:27017/shopper`
+
 On Windows
 
-`set atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/shopper`
+For Atlas `set atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/shopper`
 
-Retrieve with `$atlas_uri` or `%atlas_uri` on MacOS or Windows, and something like `atlas_uri = os.getenv('atlas_uri')` in Python.
+Retrieve with `$atlas_uri` or `%atlas_uri` on MacOS or Windows, and `atlas_uri = os.getenv('atlas_uri')` in Python.
 
 # Prepare
 
@@ -76,18 +78,18 @@ Examine the file [order.json](order.json) to get an idea of the digital order da
 
 ## Repetitive load and query to Atlas
 
-8. To load data continuously run the following command in a terminal
-
-`cd path/to/repo/folder/shopper`
-
-_local_
-
-`clear; while :; do echo $(date); python3 create_order.py | mongoimport --uri mongodb://localhost:27017/shopper --collection order --jsonArray; sleep 5; done`
-
-_Atlas_
+8. To ingest orders continuously set the right `atlas_uri` and run the following command in a terminal from the `shopper` folder:
 
 `clear; while :; do echo $(date); python3 create_order.py | mongoimport --uri $atlas_uri --collection order --jsonArray; sleep 5; done`
 
 9. To query continuously, run the below command after setting the right connection string for _local_ or _Atlas_ in `query_order.py`
 
-`clear; while :; do echo $(date); python3 query_order.py; sleep 5; done`
+`clear; while :; do clear; echo $(date); python3 query_order.py; sleep 5; done`
+
+# Charts
+
+<TODO> Dashboard on view
+
+# Online archive
+
+<TODO> Automatically offload 'old' digital receipts

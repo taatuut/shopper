@@ -2,15 +2,33 @@ import random
 import time
 import datetime
 
-# function shopper creates order with order id, bonuskaart, some products, a location in geojson format, and a timestamp
+import random
+
+# return number of random lines from a Dutch text corpus to use as notes in the order
+def random_lines(nol):
+    lines = ""
+    for l in range(nol):
+        with open("text/nld_sentences.txt", "r", encoding="utf-8") as afile:
+            line = next(afile)
+            for num, aline in enumerate(afile, 2):
+                if random.randrange(num):
+                    continue
+                line = aline
+        lines = lines + " " + line
+    return lines
+
+# create order with order id, bonuskaart, some products, a location in geojson format, a timestamp and some notes
 def shopper():
+    orders = []
     oid = round(time.time() * 1000)
     lonmin, lonmax, latmin, latmax = 5.0, 6.0, 51.7, 52.8
     orglatmin = latmin
-    stepsize = .1
+    stepsize = .3
     while lonmin < lonmax:
         n1 = random.random() * random.randint(-1,1)
         n2 = random.random() * random.randint(-1,1)
+        #notes = random_line().strip()
+        notes = str(random_lines(3).strip()).replace("'",'"').replace("\n","")
         order = {
             "type": "Feature",
             "geometry": {
@@ -29,22 +47,17 @@ def shopper():
                         {"id": "742-32", "cat": "AH", "name": "Biologisch Volle yoghurt", "quantity": random.randint(1,2), "price": 1.09}
                     ]
                 },
-                "Timestamp": str(datetime.datetime.now().replace(microsecond=0).isoformat())
+                "Timestamp": datetime.datetime.now().replace(microsecond=0).isoformat(),
+                "Notes": notes
             }
             }
-        yield(order)
+        orders.append(order)
         latmin += stepsize
         oid += 1
         if latmin > latmax:
             latmin = orglatmin
             lonmin += stepsize
+    return str(orders).replace("'",'"')
 
-# print the output in a json array
-i = 0
-print("[")
-for g in shopper():
-    if i > 0:
-      print(",")
-    print(str(g).replace("'",'"'))
-    i += 1
-print("]")
+# print the output: ends up in console or pipe to mongoimport
+print(shopper())

@@ -1,3 +1,10 @@
+
+add search
+
+add geospatial search
+
+ copy to new aggregation flow
+
 [{$unwind: {
     path: '$properties.Order.Products'
    }}, {$group: {
