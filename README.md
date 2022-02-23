@@ -2,7 +2,7 @@
 
 The Shopper repo demoes ingesting online groceries orders, and querying with a spatial query.
 
- ![Voorbeeld: digitale kassabon in de AH app](800_digitalekassabonindeahapp.png.jpg)
+ ![Example: 'digitale kassabon' in the AH app](images/800_digitalekassabonindeahapp.jpg)
 
 Shopper uses multiple tools to work with the order data: the `mongoimport` database tool for 'batch loading' and `Pymongo` driver to run a specific query in a Python script.
 
@@ -88,8 +88,10 @@ Examine the file [order.json](order.json) to get an idea of the digital order da
 
 # Charts
 
-<TODO> Dashboard on view
+ ![Example: Product sales](images/charts.png)
 
 # Online archive
 
-<TODO> Automatically offload 'old' digital receipts
+<TODO> 
+
+ ![Example: Automatically offload 'old' digital receipts](images/OnlineArchive.png)

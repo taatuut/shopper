@@ -131,3 +131,5 @@ dmypy.json
 # custom
 .DS_Store
 dump/
+text/nld_sentences.txt
+text/nld_sentences.tsv
