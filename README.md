@@ -109,11 +109,11 @@ Based on the file `order.json` there is also template file [order_template.json]
 
 # Local
 
-1. Run `python3 create_order.py` as a test, this writes a set of orders to the console, using the digital order data model in `order.json`.
+1. Run `python3 create_order.py` as a test, this writes a set of orders to the console, with a similar digital order data model as in `order.json`.
 
 2. Run `python3 create_order.py | mongoimport --uri "mongodb://localhost:27017/shopper" --collection order --jsonArray` to pipe the order stream through `mongoimport` to your local MongoDB installation. Note that the `shopper` database and `order` collection are automatically create if not there. 
 
-3. Start Compass: connect to the database, change data model on the fly, analyze the schema, query using the map, create a spatial index, export code, add to aggregation framework, create a view. See the video at <TODO>.
+3. Start Compass: connect to the database, change data model on the fly, analyze the schema, query using the map, create a spatial index, export code, add to aggregation framework, create a view. <TODO: See the video at xxx.>
 
 4. Uncomment _local_ connection string in `query_order.py` and run `python3 query_order.py`. Note that the query uses a random point so number of results will vary (0 or more).
 
@@ -143,6 +143,8 @@ Based on the file `order.json` there is also template file [order_template.json]
 
 ![Example: Automatically offload 'old' digital receipts](images/OnlineArchive.png)
 
+<TODO:
 # Search
 
 # Data Lake
+>
