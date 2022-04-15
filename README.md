@@ -15,15 +15,18 @@ The code is written on MacOS usign `VS Code`, mainly Python and Java with a bit 
 
 * Preferably an MongoDB Atlas account, cause we will use Search and Data Lake (work in preparation...). You can use the free tier cluster https://docs.atlas.mongodb.com/getting-started/
 
-I'm using Homebrew on my Mac to easily install and manage most of the following components https://brew.sh/
+I'm using Homebrew on my Mac to easily install and manage most of the following components (NOTE: I'm presales so my development environment standards might tend towards q&d a bit) https://brew.sh/
+
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
 Homebrew requires the Xcode command-line tools from Apple's Xcode
+
 `xcode-select --install`
 
 * MongoDB installed local, version 4.4 or higher https://docs.mongodb.com/manual/installation/
 
 `brew tap mongodb/brew` then `brew install mongodb-community@5.0`
+
 * MongoDB Compass, a user friendly desktop tool for data exploration and management https://www.mongodb.com/products/compass
 
 `brew install --cask mongodb-compass`
@@ -105,7 +108,7 @@ Based on the file `order.json` there is also template file [order_template.json]
 
 2. Run `python3 create_order.py | mongoimport --uri "mongodb://localhost:27017/shopper" --collection order --jsonArray` to pipe the order stream through `mongoimport` to your local MongoDB installation. Note that the `shopper` database and `order` collection are automatically create if not there. 
 
-3. Start Compass: connect to the database, change data model on the fly, analyze the schema, query using tehn map, create a spatial index, export code, add to aggregation framework, create a view. See the video at <TODO>.
+3. Start Compass: connect to the database, change data model on the fly, analyze the schema, query using the map, create a spatial index, export code, add to aggregation framework, create a view. See the video at <TODO>.
 
 4. Uncomment _local_ connection string in `query_order.py` and run `python3 query_order.py`. Note that the query uses a random point so number of results will vary (0 or more).
 
