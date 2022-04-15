@@ -4,7 +4,7 @@ The Shopper application demoes ingesting online groceries orders, and querying w
 
  ![Example: 'digitale kassabon' in the AH app](images/800_digitalekassabonindeahapp.jpg)
 
-Shopper uses multiple tools to work with the order data: the `mongoimport` database tool for 'batch loading' and `Pymongo` driver to run a specific query in a Python script. In addition there is a small Maven Java project that provides similar query functionality using the MongoDB synchronous Java driver.
+Shopper uses multiple tools to work with the order data: the `mongoimport` database tool for 'batch loading' and `Pymongo` driver to run a geospatial query in a Python script. In addition there is a small Maven Java project that provides similar query functionality using the MongoDB synchronous Java driver.
 
 The code is written on MacOS, mainly Python and Java with a bit of bash code. Some alternative command prompt code for Windows is mentioned in this readme.
 
@@ -34,7 +34,6 @@ And using Nodejs, NPM to install some other tools
 * mgeneratejs https://github.com/rueckstiess/mgeneratejs `npm install -g mgeneratejs`
 
 ## Connection strings
-
 Use *shopper* as default *database name*.
 
 ### Local
@@ -60,8 +59,7 @@ For Atlas `set atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/s
 Retrieve with `$atlas_uri` or `%atlas_uri` on MacOS or Windows, `atlas_uri = os.getenv('atlas_uri')` in Python, and `System.getenv("atlas_uri");` in Java.
 
 # Prepare
-
-## Start local MongoDB using something like:
+When running MongoDB local, start it using something like:
 
 ```
 cd path/to/repo/folder/shopper
@@ -71,7 +69,6 @@ mongod --fork --logpath /tmp/data/log/mongod.log --dbpath /tmp/data/db
 ```
 
 ## Get familiar with the data
-
 Examine the file [order.json](order.json) with a made up concept of the digital order data model.
 
 Based on the file `order.json` there is also template file [order_template.json](order_template.json) to use with `mgeneratejs`.
@@ -106,10 +103,12 @@ Based on the file `order.json` there is also template file [order_template.json]
 
 # Charts
 
- ![Example: Product sales](images/charts.png)
+![Example: Product sales](images/charts.png)
 
 # Online archive
 
-<TODO> 
+![Example: Automatically offload 'old' digital receipts](images/OnlineArchive.png)
 
- ![Example: Automatically offload 'old' digital receipts](images/OnlineArchive.png)
+# Search
+
+# Data Lake
