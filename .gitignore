@@ -133,3 +133,5 @@ dmypy.json
 dump/
 text/nld_sentences.txt
 text/nld_sentences.tsv
+INSTALL.md
+shopper.jar
