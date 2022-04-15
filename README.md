@@ -14,14 +14,17 @@ The code is written on MacOS, mainly Python and Java with a bit of bash code. So
 * MongoDB synchronous Java driver https://github.com/mongodb/mongo-java-driver add dependency to `pom.xml`
 
 * Preferably an MongoDB Atlas account, cause you want to use Search and Data Lake (work in preparation...) you can use the free tier cluster https://docs.atlas.mongodb.com/getting-started/
-* MongoDB installed local, version 4.4 or higher https://docs.mongodb.com/manual/installation/
+
+I'm using Homebrew on my Mac to easily install and manage most of the following components https://brew.sh/ `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+
+Homebrew requires the Xcode command-line tools from Apple's Xcode `xcode-select --install`
+
+* MongoDB installed local, version 4.4 or higher https://docs.mongodb.com/manual/installation/ `brew tap mongodb/brew` then `brew install mongodb-community@5.0`
 * MongoDB Compass, a user friendly desktop tool for data exploration and management https://www.mongodb.com/products/compass `brew install --cask mongodb-compass`
 
-I'm using Homebrew to easily install and manage most of the following components https://brew.sh/
-
 * A recent Python 3 installation, version 3.6 or higher `brew install python` or for a specific version `brew install python@3.10`
-* The `Pymongo` driver https://docs.mongodb.com/drivers/pymongo/ `python3 -m pip install pymongo`
-* The `mongoimport` database tool https://www.mongodb.com/try/download/database-tools
+* The `Pymongo` driver https://docs.mongodb.com/drivers/pymongo/ `python3 -m pip install pymongo` where 'python3' should be your Python executable
+* The `mongoimport` database tool https://www.mongodb.com/try/download/database-tools Starting with MongoDB 4.4.1, installing the MongoDB Server via Homebrew also installs the Database Tools. The following command will determine if the Database Tools are already installed on your system: `brew list | grep mongodb-database-tools` If not there do `brew install mongodb-database-tools` and to upgrade run `brew upgrade mongodb-database-tools`
 * Java `brew install openjdk`
 * Maven `brew install maven`
 
