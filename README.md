@@ -6,7 +6,7 @@ The Shopper application demoes ingesting online groceries orders, and querying w
 
 Shopper uses multiple tools to work with the order data: the `mongoimport` database tool for 'batch loading' and `Pymongo` driver to run a geospatial query in a Python script. In addition there is a small Maven Java project that provides similar query functionality using the MongoDB synchronous Java driver.
 
-The code is written on MacOS usign `VS Code`, mainly Python and Java with a bit of javascript and bash code. Some alternative command prompt code for Windows is mentioned in this readme.
+The code is written on MacOS using `VS Code`, mainly in Python and Java with a bit of javascript and few lines of code to run in the terminal. Some alternative command prompt code for Windows is mentioned in this readme.
 
 ## Prerequisites
 
@@ -63,12 +63,15 @@ And using Nodejs, NPM to install some other tools.
 `npm install -g mgeneratejs`
 
 ## Connection strings
+
 Use *shopper* as default *database name*.
 
 ### Local
+
 `mongodb://localhost:27017/shopper`
 
 ### Atlas
+
 Get the connection string from the Atlas user interface for the cluster you want to use, you need to set *user name*, *password* and *database name*.
 
 `mongodb+srv://<user>:<pass>@yourserver.at.mongodb.net/shopper`
@@ -79,7 +82,7 @@ On MacOS, Linux
 
 `export atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/shopper`
 
-For a local MongoDB installation use `export atlas_uri=mongodb://localhost:27017/shopper`
+With a local MongoDB installation use `export atlas_uri=mongodb://localhost:27017/shopper`
 
 On Windows
 
@@ -88,7 +91,8 @@ For Atlas `set atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/s
 Retrieve with `$atlas_uri` or `%atlas_uri` in a terminal on MacOS or Windows, `atlas_uri = os.getenv('atlas_uri')` in Python, and `System.getenv("atlas_uri");` in Java.
 
 # Prepare
-When usign a local MongoDB installation, start it using something like:
+
+When using a local MongoDB installation, start it using something like:
 
 ```
 cd path/to/repo/folder/shopper
@@ -98,6 +102,7 @@ mongod --fork --logpath /tmp/data/log/mongod.log --dbpath /tmp/data/db
 ```
 
 ## Get familiar with the data
+
 Examine the file [order.json](order.json) with a made up concept of the digital order data model.
 
 Based on the file `order.json` there is also template file [order_template.json](order_template.json) to use with `mgeneratejs`.
