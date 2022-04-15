@@ -1,16 +1,16 @@
 # Shopper
 
-The Shopper application demoes ingesting online groceries orders, and querying with a spatial query.
+The Shopper application demoes ingesting online groceries orders, and querying with a geospatial query.
 
  ![Example: 'digitale kassabon' in the AH app](images/800_digitalekassabonindeahapp.jpg)
 
 Shopper uses multiple tools to work with the order data: the `mongoimport` database tool for 'batch loading' and `Pymongo` driver to run a geospatial query in a Python script. In addition there is a small Maven Java project that provides similar query functionality using the MongoDB synchronous Java driver.
 
-The code is written on MacOS, mainly Python and Java with a bit of bash code. Some alternative command prompt code for Windows is mentioned in this readme.
+The code is written on MacOS usign `VS Code`, mainly Python and Java with a bit of javascript and bash code. Some alternative command prompt code for Windows is mentioned in this readme.
 
 ## Prerequisites
 
-* This repo :-) https://github.com/taatuut/shopper
+* This repo :nerd_face: https://github.com/taatuut/shopper
 * MongoDB synchronous Java driver https://github.com/mongodb/mongo-java-driver add dependency to `pom.xml`
 
 * Preferably an MongoDB Atlas account, cause you want to use Search and Data Lake (work in preparation...) you can use the free tier cluster https://docs.atlas.mongodb.com/getting-started/
