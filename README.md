@@ -1,21 +1,34 @@
 # Shopper
 
-The Shopper repo demoes ingesting online groceries orders, and querying with a spatial query.
+The Shopper application demoes ingesting online groceries orders, and querying with a spatial query.
 
  ![Example: 'digitale kassabon' in the AH app](images/800_digitalekassabonindeahapp.jpg)
 
-Shopper uses multiple tools to work with the order data: the `mongoimport` database tool for 'batch loading' and `Pymongo` driver to run a specific query in a Python script.
+Shopper uses multiple tools to work with the order data: the `mongoimport` database tool for 'batch loading' and `Pymongo` driver to run a specific query in a Python script. In addition there is a small Maven Java project that provides similar query functionality using the MongoDB synchronous Java driver.
 
-Code was written on MacOS, mainly Python with a bit of bash code. Some alternative command prompt code for Windows is mentioned in this readme.
+The code is written on MacOS, mainly Python and Java with a bit of bash code. Some alternative command prompt code for Windows is mentioned in this readme.
 
 ## Prerequisites
 
-* MongoDB installed local, version 4.4 or higher https://docs.mongodb.com/manual/installation/ and/or
-* A MongoDB Atlas account, you can use the free tier cluster https://docs.atlas.mongodb.com/getting-started/
-* MongoDB Compass, a user friendly desktop tool for data exploration and management https://www.mongodb.com/products/compass
-* A recent Python 3 installation, version 3.6 or higher with the `Pymongo` driver https://docs.mongodb.com/drivers/pymongo/ something like `python3 -m pip install pymongo`
-* The `mongoimport` database tool https://www.mongodb.com/try/download/database-tools
 * This repo :-) https://github.com/taatuut/shopper
+* MongoDB synchronous Java driver https://github.com/mongodb/mongo-java-driver add dependency to `pom.xml`
+
+* Preferably an MongoDB Atlas account, cause you want to use Search and Data Lake (work in preparation...) you can use the free tier cluster https://docs.atlas.mongodb.com/getting-started/
+* MongoDB installed local, version 4.4 or higher https://docs.mongodb.com/manual/installation/
+* MongoDB Compass, a user friendly desktop tool for data exploration and management https://www.mongodb.com/products/compass `brew install --cask mongodb-compass`
+
+I'm using Homebrew to easily install and manage most of the following components https://brew.sh/
+
+* A recent Python 3 installation, version 3.6 or higher `brew install python` or for a specific version `brew install python@3.10`
+* The `Pymongo` driver https://docs.mongodb.com/drivers/pymongo/ `python3 -m pip install pymongo`
+* The `mongoimport` database tool https://www.mongodb.com/try/download/database-tools
+* Java `brew install openjdk`
+* Maven `brew install maven`
+
+And using Nodejs, NPM to install some other tools
+
+* nodejs, npm `brew install node`
+* mgeneratejs https://github.com/rueckstiess/mgeneratejs `npm install -g mgeneratejs`
 
 ## Connection strings
 

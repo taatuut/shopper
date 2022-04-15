@@ -14,6 +14,8 @@ import com.mongodb.client.model.geojson.Point;
 import com.mongodb.client.model.geojson.Position;
 import static com.mongodb.client.model.Filters.near;
 
+import java.util.Random;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -24,7 +26,7 @@ import org.apache.commons.cli.ParseException;
 
 public class App {
     public static void main(String[] args) throws Exception {
-
+        Random random = new Random();
         String uri = System.getenv("atlas_uri");
         if (uri == null) {
             System.out.println("No MongoDB (Atlas) uri. Provide environment variable 'atlas_uri'.");
@@ -43,9 +45,6 @@ public class App {
         Option interval = new Option("r", "interval", true, "Request interval (seconds)");
         interval.setRequired(true);
         options.addOption(interval);
-        Option searchPoint = new Option("s", "searchpoint", true, "Search point (x,y)");
-        searchPoint.setRequired(false);
-        options.addOption(searchPoint);
 
         HelpFormatter formatter = new HelpFormatter();
         CommandLineParser parser = new DefaultParser();
@@ -62,25 +61,22 @@ public class App {
         Integer r = Integer.parseInt(cmd.getOptionValue("interval"));
         System.out.println("Number of requests is: " + n);
         System.out.println("Request interval is: " + r);
-        Double x = Double.parseDouble("100");
-        Double y = Double.parseDouble("1");
-        if (cmd.hasOption("s")) {
-            String s = cmd.getOptionValue("searchpoint");
-            String[] arrS = s.split(",", 2);
-            x = Double.parseDouble(arrS[0]);
-            y = Double.parseDouble(arrS[1]);
-            System.out.println("Search point (x,y) is: (" + x + "," + y + ")");
-        }
-
-        Point centerPoint = new Point(new Position(x, y));
-        Bson query = near("geometry", centerPoint, 1000000.0, 0.0);
 
         try (MongoClient mongoClient = MongoClients.create(uri)) {
             MongoDatabase database = mongoClient.getDatabase(dbName);
             MongoCollection<Document> collection = database.getCollection(clName);
             while (true) {
                 for (int i = 0; i < n; i++) {
-                    Document doc = collection.find(query).first();
+                    Double x = Double.parseDouble("52");
+                    Double y = Double.parseDouble("6");
+                    Double up = Double.parseDouble("10");
+                    Double low = Double.parseDouble("-10");
+                    Double div = Double.parseDouble("100");
+                    x = x + ((random.nextDouble(up - low) + low) / div);
+                    y = y + ((random.nextDouble(up - low) + low) / div);
+                    Point centerPoint = new Point(new Position(x, y));
+                    Bson query = near("geometry", centerPoint, 1000000.0, 0.0);
+                        Document doc = collection.find(query).first();
                     if (doc != null) {
                         System.out.println(doc.toJson());
                     } else {
