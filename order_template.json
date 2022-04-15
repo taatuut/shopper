@@ -1,0 +1,56 @@
+{
+    "_id": "$objectid",
+    "type": "Feature",
+    "geometry": {
+        "type": "Point",
+        "coordinates": {"$point": {"long_lim": [5, 8], "lat_lim": [51, 54]}}
+    },
+    "properties": {
+        "Order": {
+            "Naam": "$name",
+            "Bonuskaart": {"$integer": {"min": 12345678, "max": 19876543}},
+            "Ordernummer": {
+                "$numberLong": {"$numberLong": {"min": 100000}}
+            },
+            "Products": [
+                {
+                    "id": "346182",
+                    "cat": "AH",
+                    "name": "Appelsap",
+                    "quantity": {"$integer": {"min": 1, "max": 3}},
+                    "price": {"$numberDecimal": {"fixed": 3, "min": 1.25, "max": 1.35}}
+                },
+                {
+                    "id": "550-35",
+                    "cat": "AH",
+                    "name": "Avocado eetrijp",
+                    "quantity": {"$integer": {"min": 1, "max": 2}},
+                    "price": {"$numberDecimal": {"fixed": 3, "min": 2.30, "max": 2.50}}
+                },
+                {
+                    "id": "742-90",
+                    "cat": "AH",
+                    "name": "Biologisch Halfvolle melk",
+                    "quantity": {"$integer": {"min": 2, "max": 4}},
+                    "price": {"$numberDecimal": {"fixed": 3, "min": 1.18, "max": 1.24}}
+                },
+                {
+                    "id": "742-91",
+                    "cat": "AH",
+                    "name": "Biologisch Karnemelk",
+                    "quantity": {"$integer": {"min": 1, "max": 3}},
+                    "price": {"$numberDecimal": {"fixed": 3, "min": 0.99, "max": 1.05}}
+                },
+                {
+                    "id": "742-32",
+                    "cat": "AH",
+                    "name": "Biologisch Volle yoghurt",
+                    "quantity": 1,
+                    "price": 1.09
+                }
+            ]
+        },
+        "Timestamp": "$now",
+        "Notes": "$sentence"
+    }
+}
