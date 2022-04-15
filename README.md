@@ -13,25 +13,37 @@ The code is written on MacOS usign `VS Code`, mainly Python and Java with a bit 
 * This repo :nerd_face: https://github.com/taatuut/shopper
 * MongoDB synchronous Java driver https://github.com/mongodb/mongo-java-driver add dependency to `pom.xml`
 
-* Preferably an MongoDB Atlas account, cause you want to use Search and Data Lake (work in preparation...) you can use the free tier cluster https://docs.atlas.mongodb.com/getting-started/
+* Preferably an MongoDB Atlas account, cause we will use Search and Data Lake (work in preparation...). You can use the free tier cluster https://docs.atlas.mongodb.com/getting-started/
 
-I'm using Homebrew on my Mac to easily install and manage most of the following components https://brew.sh/ `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+I'm using Homebrew on my Mac to easily install and manage most of the following components https://brew.sh/
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
-Homebrew requires the Xcode command-line tools from Apple's Xcode `xcode-select --install`
+Homebrew requires the Xcode command-line tools from Apple's Xcode
+`xcode-select --install`
 
-* MongoDB installed local, version 4.4 or higher https://docs.mongodb.com/manual/installation/ `brew tap mongodb/brew` then `brew install mongodb-community@5.0`
-* MongoDB Compass, a user friendly desktop tool for data exploration and management https://www.mongodb.com/products/compass `brew install --cask mongodb-compass`
+* MongoDB installed local, version 4.4 or higher https://docs.mongodb.com/manual/installation/
+`brew tap mongodb/brew` then `brew install mongodb-community@5.0`
+* MongoDB Compass, a user friendly desktop tool for data exploration and management https://www.mongodb.com/products/compass
+`brew install --cask mongodb-compass`
 
-* A recent Python 3 installation, version 3.6 or higher `brew install python` or for a specific version `brew install python@3.10`
-* The `Pymongo` driver https://docs.mongodb.com/drivers/pymongo/ `python3 -m pip install pymongo` where 'python3' should be your Python executable
-* The `mongoimport` database tool https://www.mongodb.com/try/download/database-tools Starting with MongoDB 4.4.1, installing the MongoDB Server via Homebrew also installs the Database Tools. The following command will determine if the Database Tools are already installed on your system: `brew list | grep mongodb-database-tools` If not there do `brew install mongodb-database-tools` and to upgrade run `brew upgrade mongodb-database-tools`
-* Java `brew install openjdk`
-* Maven `brew install maven`
+* A recent Python 3 installation, version 3.6 or higher
+`brew install python` or for a specific version `brew install python@3.10`
+* The `Pymongo` driver https://docs.mongodb.com/drivers/pymongo/
+`python3 -m pip install pymongo` where 'python3' should match the path to your Python executable
+* The `mongoimport` database tool https://www.mongodb.com/try/download/database-tools Starting with MongoDB 4.4.1, installing the MongoDB Server via Homebrew also installs the Database Tools. The following command will determine if the Database Tools are already installed on your system:
+`brew list | grep mongodb-database-tools`
+If not there do `brew install mongodb-database-tools` and to upgrade run `brew upgrade mongodb-database-tools`
+* Java
+`brew install openjdk`
+* Maven
+`brew install maven`
 
-And using Nodejs, NPM to install some other tools
+And using Nodejs, NPM to install some other tools.
 
-* nodejs, npm `brew install node`
-* mgeneratejs https://github.com/rueckstiess/mgeneratejs `npm install -g mgeneratejs`
+* nodejs, npm
+`brew install node`
+* mgeneratejs https://github.com/rueckstiess/mgeneratejs
+`npm install -g mgeneratejs`
 
 ## Connection strings
 Use *shopper* as default *database name*.
@@ -40,11 +52,11 @@ Use *shopper* as default *database name*.
 `mongodb://localhost:27017/shopper`
 
 ### Atlas
-Get the connection string from the Atlas user interface for the cluster you want to use, you need to change *user name*, *password* and *database name*.
+Get the connection string from the Atlas user interface for the cluster you want to use, you need to set *user name*, *password* and *database name*.
 
 `mongodb+srv://<user>:<pass>@yourserver.at.mongodb.net/shopper`
 
-Set atlas_uri as an environment variable to avoid storing connection strings, passwords and the alike in code
+Set atlas_uri as an environment variable to be able to retrieve it from both Python script and Java jar (and to avoid storing connection strings, passwords and the alike in code...).
 
 On MacOS, Linux
 
@@ -56,10 +68,10 @@ On Windows
 
 For Atlas `set atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/shopper`
 
-Retrieve with `$atlas_uri` or `%atlas_uri` on MacOS or Windows, `atlas_uri = os.getenv('atlas_uri')` in Python, and `System.getenv("atlas_uri");` in Java.
+Retrieve with `$atlas_uri` or `%atlas_uri` in a terminal on MacOS or Windows, `atlas_uri = os.getenv('atlas_uri')` in Python, and `System.getenv("atlas_uri");` in Java.
 
 # Prepare
-When running MongoDB local, start it using something like:
+When usign a local MongoDB installation, start it using something like:
 
 ```
 cd path/to/repo/folder/shopper
