@@ -57,11 +57,11 @@ On Windows
 
 For Atlas `set atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/shopper`
 
-Retrieve with `$atlas_uri` or `%atlas_uri` on MacOS or Windows, and `atlas_uri = os.getenv('atlas_uri')` in Python.
+Retrieve with `$atlas_uri` or `%atlas_uri` on MacOS or Windows, `atlas_uri = os.getenv('atlas_uri')` in Python, and `System.getenv("atlas_uri");` in Java.
 
 # Prepare
 
-## Start local MongoDB using somethig like:
+## Start local MongoDB using something like:
 
 ```
 cd path/to/repo/folder/shopper
@@ -72,7 +72,9 @@ mongod --fork --logpath /tmp/data/log/mongod.log --dbpath /tmp/data/db
 
 ## Get familiar with the data
 
-Examine the file [order.json](order.json) to get an idea of the digital order data model.
+Examine the file [order.json](order.json) with a made up concept of the digital order data model.
+
+Based on the file `order.json` there is also template file [order_template.json](order_template.json) to use with `mgeneratejs`.
 
 # Local
 
