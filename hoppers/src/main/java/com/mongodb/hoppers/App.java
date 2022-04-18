@@ -10,12 +10,10 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import com.mongodb.client.model.Aggregates.*;
 import com.mongodb.client.model.geojson.Point;
 import com.mongodb.client.model.geojson.Position;
 import static com.mongodb.client.model.Filters.near;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import org.apache.commons.cli.CommandLine;
