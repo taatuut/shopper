@@ -10,10 +10,12 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
+import com.mongodb.client.model.Aggregates.*;
 import com.mongodb.client.model.geojson.Point;
 import com.mongodb.client.model.geojson.Position;
 import static com.mongodb.client.model.Filters.near;
 
+import java.util.Arrays;
 import java.util.Random;
 
 import org.apache.commons.cli.CommandLine;
@@ -35,8 +37,8 @@ public class App {
             System.out.println();
             System.exit(1);
         }
-        String dbName = "test";
-        String clName = "geom";
+        String dbName = "shopper";
+        String clName = "orders";
 
         Options options = new Options();
         Option requests = new Option("n", "requests", true, "Number of requests");
@@ -67,20 +69,21 @@ public class App {
             MongoCollection<Document> collection = database.getCollection(clName);
             while (true) {
                 for (int i = 0; i < n; i++) {
-                    Double x = Double.parseDouble("52");
-                    Double y = Double.parseDouble("6");
-                    Double up = Double.parseDouble("10");
-                    Double low = Double.parseDouble("-10");
+                    Double lon = Double.parseDouble("5.5");
+                    Double lat = Double.parseDouble("52");
+                    Double up = Double.parseDouble("25");
+                    Double low = Double.parseDouble("-25");
                     Double div = Double.parseDouble("100");
-                    x = x + ((random.nextDouble(up - low) + low) / div);
-                    y = y + ((random.nextDouble(up - low) + low) / div);
-                    Point centerPoint = new Point(new Position(x, y));
-                    Bson query = near("geometry", centerPoint, 1000000.0, 0.0);
-                        Document doc = collection.find(query).first();
-                    if (doc != null) {
-                        System.out.println(doc.toJson());
+                    lon = lon + ((random.nextDouble(up - low) + low) / div);
+                    lat = lat + ((random.nextDouble(up - low) + low) / div);
+                    Point centerPoint = new Point(new Position(lon, lat));
+                    Bson query = near("geometry", centerPoint, 10000.0, 0.0);
+                    System.out.println("query" + query.toString());
+                    Document fDoc = collection.find(query).first();
+                    if (fDoc != null) {
+                        System.out.println(fDoc.toJson());
                     } else {
-                        System.out.println("No results with search point (" + x + "," + y + ")");
+                        System.out.println("No results with search point (" + lon + "," + lat + ")");
                     }
                 }
                 Thread.sleep(5 * 1000);

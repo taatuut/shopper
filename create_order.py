@@ -6,9 +6,9 @@ import datetime
 def shopper():
     orders = []
     oid = round(time.time() * 1000)
-    lonmin, lonmax, latmin, latmax = 5.0, 6.0, 51.7, 52.8
+    lonmin, lonmax, latmin, latmax = 3.0, 8.0, 51.0, 54.0
     orglatmin = latmin
-    stepsize = .3
+    stepsize = 1
     while lonmin < lonmax:
         n1 = random.random() * random.randint(-1,1)
         n2 = random.random() * random.randint(-1,1)
