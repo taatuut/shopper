@@ -5,7 +5,7 @@ import datetime
 # create order with order id, bonuskaart, some products, a location in geojson format, a timestamp and some notes
 def shopper():
     orders = []
-    oid = round(time.time() * 1000)
+    orderid = round(time.time() * 1000)
     lonmin, lonmax, latmin, latmax = 3.0, 8.0, 51.0, 54.0
     orglatmin = latmin
     stepsize = 1
@@ -22,7 +22,7 @@ def shopper():
             "properties": {
                 "Order": {
                     "Bonuskaart": random.randint(10000000,20000000),
-                    "Ordernummer": oid, 
+                    "Ordernummer": orderid, 
                     "Products": [
                         {"id": "346182", "cat": "AH", "name": "Appelsap", "quantity": random.randint(2,3), "price": 1.29},
                         {"id": "550-35", "cat": "AH", "name": "Avocado eetrijp", "quantity": random.randint(1,2), "price": 2.39},
@@ -31,13 +31,13 @@ def shopper():
                         {"id": "742-32", "cat": "AH", "name": "Biologisch Volle yoghurt", "quantity": random.randint(1,2), "price": 1.09}
                     ]
                 },
-                "Timestamp": datetime.datetime.now().replace(microsecond=0).isoformat(),
+                "Timestamp": {"$date": datetime.datetime.now().replace(microsecond=0).isoformat()+"Z"},
                 "Notes": notes
             }
             }
         orders.append(order)
         latmin += stepsize
-        oid += 1
+        orderid += 1
         if latmin > latmax:
             latmin = orglatmin
             lonmin += stepsize

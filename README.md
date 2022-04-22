@@ -6,7 +6,7 @@ The Shopper application demoes ingesting online groceries orders, and querying w
 
 Shopper uses multiple tools to work with the order data: the `mongoimport` database tool for 'batch loading' and `Pymongo` driver to run a geospatial query in a Python script. In addition there is a small Maven Java project that provides similar query functionality using the MongoDB synchronous Java driver.
 
-The code is written on MacOS using `VS Code`, mainly in Python and Java with a bit of javascript and few lines of code to run in the terminal. Some alternative command prompt code for Windows is mentioned in this readme.
+The code is written on MacOS using `Microsoft VS Code`, mainly in Python and Java with a bit of javascript and few lines of code to run in the terminal. Some alternative command prompt code for Windows is mentioned in this readme.
 
 ## Prerequisites
 
@@ -119,7 +119,7 @@ Set `atlas_uri` if not done before.
 
 1. To ingest a certain amount of orders, run the following command in a terminal from the `shopper` folder:
 
-`mgeneratejs order_template.json -n 1000 | mongoimport --uri $atlas_uri --collection orders`
+`mgeneratejs order_template.json -n 1000000 | mongoimport --uri $atlas_uri --collection orders`
 
 Or to run continuously, use the  Python script `create_order.py` from Test step 1:
 
@@ -158,3 +158,11 @@ In many real life use cases data ages over time.
 # Search
 # Data Lake
 -->
+
+# Nice to add
+
+* Create separate stream of orders with little bit different data structure to different collection in a different database, can use with mgeneratejs template for that
+
+* Create search indexes with same name on the two collections
+
+* Create data lake on both collections to get one access point for search
