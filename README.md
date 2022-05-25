@@ -107,11 +107,11 @@ Based on the file `order.json` there is also template file [order_template.json]
 
 Set `atlas_uri` if not done before.
 
-1. Run `python3 create_order.py` as a test, this writes a set of orders to the console, with a similar digital order data model as in `order.json`. This script also adds some random notes in Dutch to the order. This information is useful to query with full text search provided by Atlas Search. Besides that there is also the order template json file that mgeneratejs uses to create data. This does not include the option to add notes in Dutch.
+1. Run `python3 create_order.py` as a test, this writes a set of orders to the console, with a similar digital order data model as in `order.json`. This script also adds some random notes in Dutch to the order. This information is useful to query with full text search provided by Atlas Search. Besides that there is the order template json file that mgeneratejs uses to create data (this template does not include the option to add notes in Dutch).
 
 2. Run `python3 create_order.py | mongoimport --uri $atlas_uri --collection orders --jsonArray` to pipe the orders output of the Python script directly through `mongoimport` to your MongoDB database. Note that the `shopper` database and `orders` collection are automatically created if they do not exist. 
 
-3. Start Compass: connect to the database, change data model on the fly, analyze the schema, query using the map, create a spatial index to speed up querying, export code in your preferred programming language, create a search index on the notes, add full text search to an aggregation framework data pipeline, create a view with aggregated results on revenue per product. <!--TODO: See the video at xxx.-->
+3. Start Compass: connect to the database, change data model on the fly, analyze the schema, query using the map, create a `2dsphere` spatial index on `geometry`to speed up querying, export code in your preferred programming language. Optional: create a search index on `properties.Notes`, add full text search to an aggregation framework data pipeline, create a view with aggregated results on revenue per product. <!--TODO: See the video at xxx.-->
 
 4. Run `python3 query_order.py`. Note that the query uses a random point in a rectangle roughly covering the Netherlands. The number of results will vary (0 or more). In the next step we will also use the Java project to continuously query the database.
 
@@ -121,7 +121,7 @@ Set `atlas_uri` if not done before.
 
 `mgeneratejs order_template.json -n 1000000 | mongoimport --uri $atlas_uri --collection orders`
 
-Or to run continuously, use the  Python script `create_order.py` from Test step 1:
+To run the  Python script `create_order.py` from Test step 1 continuously, run:
 
 `clear; while :; do echo $(date); python3 create_order.py | mongoimport --uri $atlas_uri --collection orders --jsonArray; sleep 5; done`
 
@@ -150,19 +150,18 @@ MongoDB Atlas Charts enables you to visualize real-time application data. You ca
 
 # Online archive
 
-In many real life use cases data ages over time.
+In many real life use cases data like orders, transactions or email ages over time, and then becomes less relevant to consult for customers. It can make sense to offload (tier) data based on a timestamp or any custom criteria to cheaper storage. Atlas can move infrequently accessed data from your Atlas cluster to a MongoDB managed read-only Data Lake on cloud object storage. Once Atlas archives the data, you have a unified view of your Atlas and Online Archive data in a read-only Data Lake, so you can still query your data with one single endpoint. In fact you can query the 'hot' data or the offloaded data separately just using a difefrent connection string. Because the smaller volume of hot data, the working set and indexes shrink too, so this frees up valuable RAM and CPU resources in the operational environment. If you want to create an Online Archive based on time criteria you need an index on the field containing datetime info.
 
 ![Example: Automatically offload 'old' digital receipts](images/OnlineArchive.png)
 
 <!--TODO:
 # Search
+# Online Archive
 # Data Lake
 -->
 
 # Nice to add
 
 * Create separate stream of orders with little bit different data structure to different collection in a different database, can use with mgeneratejs template for that
-
 * Create search indexes with same name on the two collections
-
 * Create data lake on both collections to get one access point for search

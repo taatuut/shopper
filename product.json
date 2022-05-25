@@ -1,0 +1,30 @@
+{
+    "id": "C2-01",
+    "languages": [
+        {
+            "english": {
+                "name": "Pepper",
+                "description": "Black pepper seeds in a glass container with plastic lid."
+            }
+        },
+        {
+            "dutch": {
+                "name": "Peper",
+                "description": "Zwarte peper zaden in een glazen potje met plastic sluiting."
+            }
+        }
+    ],
+    "price": 2.80,
+    "currency": "EUR",
+    "quantity": 40,
+    "unit": "gram",
+    "image": "http://img1.exportersindia.com/product_images/bc-small/dir_23/674664/black-pepper-seed-1680115.jpg",
+    "valid": {
+        "from": {
+            "$date": "2022-05-11T17:54:14.692Z"
+        },
+        "to": {
+            "$date": "9999-12-31T00:00:00.000Z"
+        }
+    }
+}
