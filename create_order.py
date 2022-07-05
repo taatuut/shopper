@@ -31,7 +31,7 @@ def shopper():
                         {"id": "742-32", "cat": "AH", "name": "Biologisch Volle yoghurt", "quantity": random.randint(1,2), "price": 1.09}
                     ]
                 },
-                "Timestamp": {"$date": datetime.datetime.now().replace(microsecond=0).isoformat()+"Z"},
+                "Timestamp": {"$date": (datetime.datetime.now() + datetime.timedelta(days=random.randint(-60, 2), hours=random.randint(-23, 23))).replace(microsecond=0).isoformat()+"Z"},
                 "Notes": notes
             }
             }
