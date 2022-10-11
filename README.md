@@ -53,6 +53,7 @@ NOTE: `pymonogo` needs module `dnspython` to use `mongodb+srv` connection string
 * The `mongoimport` database tool https://www.mongodb.com/try/download/database-tools Starting with MongoDB 4.4.1, installing the MongoDB Server via Homebrew also installs the Database Tools. The following command will determine if the Database Tools are already installed on your system:
 
 `brew list | grep mongodb-database-tools`
+
 If not there do `brew install mongodb-database-tools` and to upgrade run `brew upgrade mongodb-database-tools`
 
 * And using Nodejs, NPM to install some other tools like `mgeneratejs`.
@@ -171,3 +172,5 @@ In many real life use cases data like orders, transactions or email ages over ti
 * Create separate stream of orders with little bit different data structure to different collection in a different database, can use with mgeneratejs template for that
 * Create search indexes with same name on the two collections
 * Create data lake on both collections to get one access point for search
+* Run fuzzy search with misspellings https://www.mongodb.com/docs/atlas/atlas-search/text/
+* Run more-like-this queries to find similar orders, or similar notes in orders https://www.mongodb.com/docs/atlas/atlas-search/morelikethis/
