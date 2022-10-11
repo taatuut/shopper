@@ -36,7 +36,9 @@ Of course you can also run this with MongoDB installed locally (use version 4.4 
 
 * The `Pymongo` driver https://docs.mongodb.com/drivers/pymongo/
 
-`python3 -m pip install pymongo` where 'python3' should match the path to your Python executable
+`python3 -m pip install pymongo dnspython` where 'python3' should match the path to your Python executable
+
+NOTE: `pymonogo` needs module `dnspython` to use `mongodb+srv` connection strings, see https://pypi.org/project/pymongo/
 
 * Maven
 
@@ -113,19 +115,27 @@ Set `atlas_uri` if not done before.
 
 3. Start Compass: connect to the database, change data model on the fly, analyze the schema, query using the map, create a `2dsphere` spatial index on `geometry`to speed up querying, export code in your preferred programming language. Optional: create a search index on `properties.Notes`, add full text search to an aggregation framework data pipeline, create a view with aggregated results on revenue per product. <!--TODO: See the video at xxx.-->
 
-4. Run `python3 query_order.py`. Note that the query uses a random point in a rectangle roughly covering the Netherlands. The number of results will vary (0 or more). In the next step we will also use the Java project to continuously query the database.
+4. Run `python3 query_order.py` in another terminal/command window. Note that the query uses a random point in a rectangle roughly covering the Netherlands. The number of results will vary (0 or more). In the next step we will also use the Java project to continuously query the database.
 
-## Repetitive load and query
+## Batch load
 
-1. To ingest a certain amount of orders, run the following command in a terminal from the `shopper` folder:
+To ingest a certain amount of orders, run the following command in a terminal from the `shopper` folder:
 
 `mgeneratejs order_template.json -n 1000000 | mongoimport --uri $atlas_uri --collection orders`
 
-To run the  Python script `create_order.py` from Test step 1 continuously, run:
+## Repetitive load and query
 
-`clear; while :; do echo $(date); python3 create_order.py | mongoimport --uri $atlas_uri --collection orders --jsonArray; sleep 5; done`
+1. To load data the Python script `create_order.py` from Test step 1 continuously, run:
 
-2. Create the jar for the Java project (it is included in the repo, but might be good to create your own to match library and driver versions).
+`clear; while :; do echo $(date); python3 create_order.py | mongoimport --uri $atlas_uri --collection orders --jsonArray; sleep 30; done`
+
+NOTE: adjust the sleep value to determine how quickly to run.
+
+2. To query with a random point run:
+
+`clear; while :; do clear; echo $(date); python3 query_order.py; sleep 30; done`
+
+As an alternative you can use the Java app. Create the jar for the Java project (it is included in the repo, but might be good to create your own to match library and driver versions).
 
 Run `java -jar shopper.jar` to list the required input options:
 
@@ -137,10 +147,6 @@ usage: Shopper Info
  ```
 
 Now run like `java -jar shopper.jar -n 3 -r 5` to send three queries with a random location every five seconds.
-
-As an alternative to the Java app, run the following command:
-
-`clear; while :; do clear; echo $(date); python3 query_order.py; sleep 5; done`
 
 # Charts
 
