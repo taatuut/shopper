@@ -132,6 +132,16 @@ To ingest a certain amount of orders, run the following command in a terminal fr
 
 NOTE: adjust the sleep value to determine how quickly to run.
 
+If Compass says `connection <monitor> to 137.117.202.254:27017 closed` then IP might not be whitelisted. Same if mongoimport says
+
+```
+2022-12-07T01:40:11.583+0100    shopper.orders  0B
+2022-12-07T01:40:14.583+0100    shopper.orders  0B
+2022-12-07T01:40:17.584+0100    shopper.orders  0B
+```
+
+Check IP whitelist and add idf necessary.
+
 2. To query with a random point run:
 
 `clear; while :; do clear; echo $(date); python3 query_order.py; sleep 30; done`
