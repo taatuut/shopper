@@ -112,6 +112,16 @@ Set `mongodb_uri` if not done before.
 
 1. Run `python3 create_order.py` as a test, this writes a set of orders to the console, with a similar digital order data model as in `order.json`. This script also adds some random notes in Dutch to the order. This information is useful to query with full text search provided by Atlas Search. Besides that there is the order template json file that mgeneratejs uses to create data (this template does not include the option to add notes in Dutch).
 
+If Compass says `connection <monitor> to some.mongodb.atlas.ip:27017 closed` then your IP might not be whitelisted. Same if `mongoimport` displays the following message continuously:
+
+```
+2022-12-07T01:40:11.583+0100    shopper.orders  0B
+2022-12-07T01:40:14.583+0100    shopper.orders  0B
+2022-12-07T01:40:17.584+0100    shopper.orders  0B
+```
+
+Check IP whitelist and add if necessary.
+
 2. Run `python3 create_order.py | mongoimport --uri $mongodb_uri --db=shopper --collection=orders --jsonArray` to pipe the orders output of the Python script directly through `mongoimport` to your MongoDB database. Note that the `shopper` database and `orders` collection are automatically created if they do not exist. 
 
 3. Start Compass: connect to the database, change data model on the fly, analyze the schema, query using the map, create a `2dsphere` spatial index on `geometry`to speed up querying, export code in your preferred programming language. Optional: create a search index on `properties.Notes`, add full text search to an aggregation framework data pipeline, create a view with aggregated results on revenue per product. <!--TODO: See the video at xxx.-->
