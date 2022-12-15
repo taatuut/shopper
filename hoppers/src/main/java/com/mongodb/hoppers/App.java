@@ -27,11 +27,11 @@ import org.apache.commons.cli.ParseException;
 public class App {
     public static void main(String[] args) throws Exception {
         Random random = new Random();
-        String uri = System.getenv("atlas_uri");
+        String uri = System.getenv("mongodb_uri");
         if (uri == null) {
-            System.out.println("No MongoDB (Atlas) uri. Provide environment variable 'atlas_uri'.");
+            System.out.println("No MongoDB (Atlas) uri. Provide environment variable 'mongodb_uri'.");
             System.out.println("For example use 'export' or 'set':");
-            System.out.println("export atlas_uri=mongodb+srv://user:pass@mycluster.mongodb.net/test");
+            System.out.println("export mongodb_uri=mongodb+srv://user:pass@mycluster.mongodb.net/test");
             System.out.println();
             System.exit(1);
         }
