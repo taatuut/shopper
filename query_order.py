@@ -3,8 +3,8 @@ import random
 import os
 
 # See README.md regarding exporting Atlas connection string to an envrionment variable
-atlas_uri = os.getenv('atlas_uri')
-client = MongoClient(atlas_uri)
+mongodb_uri = os.getenv('mongodb_uri')
+client = MongoClient(mongodb_uri)
 db = 'shopper'
 col = 'orders'
 orders = client[db][col]

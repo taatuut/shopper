@@ -72,23 +72,23 @@ Use *shopper* as default *database name*.
 
 Get the connection string from the Atlas user interface for the cluster you want to use, you need to set *user name*, *password* and *database name*.
 
-`mongodb+srv://<user>:<pass>@yourserver.at.mongodb.net/shopper`
+`mongodb+srv://<user>:<pass>@yourserver.at.mongodb.net`
 
-With a standard local installation you can use `mongodb://localhost:27017/shopper`
+With a standard local installation you can use `mongodb://localhost:27017`
 
-Set atlas_uri as an environment variable to be able to retrieve it from both Python script and Java jar (and to avoid storing connection strings, passwords and the alike in code...).
+Set mongodb_uri as an environment variable to be able to retrieve it from both Python script and Java jar (and to avoid storing connection strings, passwords and the alike in code...).
 
 *On MacOS, Linux*
 
-`export atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/shopper`
+`export mongodb_uri=mongodb+srv://something:secret@some.place.mongodb.net`
 
-With a local MongoDB installation use `export atlas_uri=mongodb://localhost:27017/shopper`
+With a local MongoDB installation use `export mongodb_uri=mongodb://localhost:27017`
 
 *On Windows*
 
-For Atlas `set atlas_uri=mongodb+srv://something:secret@some.place.mongodb.net/shopper`
+For Atlas `set mongodb_uri=mongodb+srv://something:secret@some.place.mongodb.net`
 
-Retrieve with `$atlas_uri` or `%atlas_uri` in a terminal on MacOS or Windows, in Python use `atlas_uri = os.getenv('atlas_uri')`, and `System.getenv("atlas_uri");` in Java.
+Retrieve with `$mongodb_uri` or `%mongodb_uri` in a terminal on MacOS or Windows, in Python use `mongodb_uri = os.getenv('mongodb_uri')`, and `System.getenv("mongodb_uri");` in Java.
 
 # Prepare
 
@@ -108,11 +108,11 @@ Based on the file `order.json` there is also template file [order_template.json]
 
 # Test
 
-Set `atlas_uri` if not done before.
+Set `mongodb_uri` if not done before.
 
 1. Run `python3 create_order.py` as a test, this writes a set of orders to the console, with a similar digital order data model as in `order.json`. This script also adds some random notes in Dutch to the order. This information is useful to query with full text search provided by Atlas Search. Besides that there is the order template json file that mgeneratejs uses to create data (this template does not include the option to add notes in Dutch).
 
-2. Run `python3 create_order.py | mongoimport --uri $atlas_uri --collection orders --jsonArray` to pipe the orders output of the Python script directly through `mongoimport` to your MongoDB database. Note that the `shopper` database and `orders` collection are automatically created if they do not exist. 
+2. Run `python3 create_order.py | mongoimport --uri $mongodb_uri --db=shopper --collection=orders --jsonArray` to pipe the orders output of the Python script directly through `mongoimport` to your MongoDB database. Note that the `shopper` database and `orders` collection are automatically created if they do not exist. 
 
 3. Start Compass: connect to the database, change data model on the fly, analyze the schema, query using the map, create a `2dsphere` spatial index on `geometry`to speed up querying, export code in your preferred programming language. Optional: create a search index on `properties.Notes`, add full text search to an aggregation framework data pipeline, create a view with aggregated results on revenue per product. <!--TODO: See the video at xxx.-->
 
@@ -122,13 +122,13 @@ Set `atlas_uri` if not done before.
 
 To ingest a certain amount of orders, run the following command in a terminal from the `shopper` folder:
 
-`mgeneratejs order_template.json -n 1000000 | mongoimport --uri $atlas_uri --collection orders`
+`mgeneratejs order_template.json -n 1000000 | mongoimport --uri $mongodb_uri --db=shopper --collection=orders`
 
 ## Repetitive load and query
 
 1. To load data the Python script `create_order.py` from Test step 1 continuously, run:
 
-`clear; while :; do echo $(date); python3 create_order.py | mongoimport --uri $atlas_uri --collection orders --jsonArray; sleep 30; done`
+`clear; while :; do echo $(date); python3 create_order.py | mongoimport --uri $mongodb_uri --db=shopper --collection=orders --jsonArray; sleep 30; done`
 
 NOTE: adjust the sleep value to determine how quickly to run.
 
